@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSYNAPSE — Psychology Club of DPS Dwarka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0D1B2A;
+      --violet: #6C3FC5;
+      --lavender: #C4B5F4;
+      --cream: #F0EDE6;
+      --slate: #4A5568;
+      --off-white: #FAF9F7;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--navy); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,27,42,0.97);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 3rem; height: 64px;
+      border-bottom: 1px solid rgba(196,181,244,0.15);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; letter-spacing: 0.04em; text-decoration: none; }
+    .nav-logo span { color: var(--lavender); font-style: italic; }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav ul a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--lavender); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.7); border-radius: 2px; transition: all 0.3s; }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 3rem;
+    }
+    canvas#synapse { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.35; }
+    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 760px; }
+    .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lavender); font-weight: 500; margin-bottom: 1.5rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 10vw, 6rem); color: #fff; line-height: 1.03; margin-bottom: 0.3rem; }
+    .hero-title em { color: var(--lavender); font-style: italic; }
+    .hero-sub { font-family: 'Playfair Display', serif; font-size: clamp(0.78rem, 2vw, 0.95rem); color: rgba(196,181,244,0.6); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem; }
+    .hero-desc { font-size: 1rem; color: rgba(255,255,255,0.58); line-height: 1.85; max-width: 520px; margin: 0 auto 2.8rem; }
+    .btn-primary { display: inline-block; background: var(--violet); color: #fff; padding: 0.9rem 2.5rem; border-radius: 2px; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; transition: background 0.2s; }
+    .btn-primary:hover { background: #7d4de0; }
+    .btn-outline { display: inline-block; border: 1px solid rgba(196,181,244,0.4); color: var(--lavender); padding: 0.9rem 2.5rem; border-radius: 2px; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; margin-left: 1rem; transition: border-color 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--lavender); color: #fff; }
+    .hero-scroll { margin-top: 3.5rem; color: rgba(255,255,255,0.25); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; }
+    .section-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--violet); font-weight: 500; margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; color: var(--navy); }
+    .section-title em { font-style: italic; color: var(--violet); }
+    .divider { width: 48px; height: 2px; background: var(--violet); margin: 1.5rem 0 2rem; }
+
+    /* ABOUT */
+    .about-section { background: var(--off-white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1100px; margin: 3rem auto 0; }
+    .about-text p { font-size: 0.97rem; color: var(--slate); line-height: 1.9; margin-bottom: 1.2rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-card { background: var(--navy); padding: 2rem 1.5rem; border-radius: 2px; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--lavender); font-weight: 600; }
+    .stat-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.4rem; }
+
+    .pillars { display: flex; gap: 1.2rem; margin-top: 2.5rem; }
+    .pillar { flex: 1; padding: 1.6rem; border: 1px solid rgba(108,63,197,0.15); border-top: 3px solid var(--violet); background: #fff; }
+    .pillar h4 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.5rem; color: var(--navy); }
+    .pillar p { font-size: 0.84rem; color: var(--slate); line-height: 1.7; }
+
+    /* EVENTS */
+    .events-section { background: var(--navy); }
+    .events-section .section-title { color: #fff; }
+    .events-section .section-label { color: var(--lavender); }
+    .events-section .divider { background: var(--lavender); }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 3rem auto 0; }
+    .event-card { border: 1px solid rgba(196,181,244,0.15); padding: 2rem; border-radius: 2px; transition: border-color 0.25s, transform 0.25s; cursor: pointer; }
+    .event-card:hover { border-color: rgba(196,181,244,0.5); transform: translateY(-5px); }
+    .event-tag { display: inline-block; font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lavender); background: rgba(108,63,197,0.3); padding: 0.28rem 0.7rem; border-radius: 1px; margin-bottom: 1.2rem; }
+    .event-date { font-size: 0.72rem; color: rgba(255,255,255,0.32); letter-spacing: 0.1em; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .event-title { font-family: 'Playfair Display', serif; font-size: 1.18rem; color: #fff; line-height: 1.3; margin-bottom: 0.8rem; }
+    .event-desc { font-size: 0.84rem; color: rgba(255,255,255,0.48); line-height: 1.75; }
+    .event-arrow { margin-top: 1.5rem; color: var(--lavender); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* JOIN */
+    .join-section { background: var(--cream); }
+    .join-inner { max-width: 660px; margin: 0 auto; text-align: center; }
+    .join-inner .divider { margin: 1.5rem auto 2rem; }
+    .join-inner > p { font-size: 0.97rem; color: var(--slate); line-height: 1.85; margin-bottom: 2.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); font-weight: 500; margin-bottom: 0.4rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(108,63,197,0.25);
+      border-radius: 2px; background: #fff; font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; color: var(--navy); outline: none; transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(108,63,197,0.1); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-full { grid-column: span 2; }
+    .submit-btn { width: 100%; background: var(--violet); color: #fff; border: none; padding: 1rem 2rem; font-family: 'Inter', sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-radius: 2px; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
+    .submit-btn:hover { background: #7d4de0; }
+    .form-success { display: none; background: rgba(108,63,197,0.08); border: 1px solid rgba(108,63,197,0.3); border-radius: 2px; padding: 1.5rem; text-align: center; color: var(--violet); font-size: 0.9rem; margin-top: 1rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(196,181,244,0.1); flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.5); font-size: 1rem; }
+    .footer-logo span { color: var(--lavender); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--lavender); }
+    .footer-credits { font-size: 0.72rem; color: rgba(255,255,255,0.22); letter-spacing: 0.05em; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      nav ul { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(13,27,42,0.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(196,181,244,0.15); }
+      nav ul.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .events-grid { grid-template-columns: 1fr; }
+      .pillars { flex-direction: column; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-full { grid-column: span 1; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      .btn-outline { margin-left: 0; margin-top: 0.8rem; }
+      .hero-content .btn-outline { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">PSY<span>NAPSE</span></a>
+  <ul id="nav-menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="synapse"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">DPS Dwarka &nbsp;·&nbsp; Psychology Club</p>
+    <h1 class="hero-title">PSY<em>NAPSE</em></h1>
+    <p class="hero-sub">Where minds connect</p>
+    <p class="hero-desc">A space for students fascinated by the human mind — exploring behaviour, cognition, and the stories that shape who we are.</p>
+    <a href="#join" class="btn-primary">Join the Club</a>
+    <a href="#events" class="btn-outline">Upcoming Events</a>
+    <p class="hero-scroll">↓ &nbsp; scroll to explore</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">About Us</p>
+    <h2 class="section-title">A community built on<br><em>intellectual curiosity</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="divider"></div>
+        <p>PSYNAPSE is DPS Dwarka's psychology club — a space for students who are fascinated by the human mind and want to go beyond the textbook.</p>
+        <p>We host speaker sessions, case-study discussions, debates on mental health policy, and immersive workshops. Whether you're a future psychologist or simply someone who loves understanding people, this is your space.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <h4>Explore</h4>
+            <p>Deep-dives into cognitive science, social psychology, and neuroscience.</p>
+          </div>
+          <div class="pillar">
+            <h4>Discuss</h4>
+            <p>Structured debates and open forums on contemporary mental health issues.</p>
+          </div>
+          <div class="pillar">
+            <h4>Grow</h4>
+            <p>Workshops, seminars, and mentorship from faculty and professionals.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">80+</div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Events / Year</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Expert Talks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Research Projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-section" id="events">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label">Upcoming Events</p>
+    <h2 class="section-title">What's happening<br><em style="color:var(--lavender);">this semester</em></h2>
+    <div class="divider"></div>
+    <div class="events-grid">
+      <div class="event-card">
+        <span class="event-tag">Workshop</span>
+        <p class="event-date">July 18, 2026</p>
+        <h3 class="event-title">The Psychology of Decision-Making</h3>
+        <p class="event-desc">An interactive session unpacking cognitive biases and how they shape everyday choices — from Kahneman to real life.</p>
+        <p class="event-arrow">Register →</p>
+      </div>
+      <div class="event-card">
+        <span class="event-tag">Speaker Series</span>
+        <p class="event-date">August 5, 2026</p>
+        <h3 class="event-title">Mind & Society: A Therapist's Lens</h3>
+        <p class="event-desc">A clinical psychologist shares insights on adolescent mental health, therapy practice, and navigating a complex world.</p>
+        <p class="event-arrow">Register →</p>
+      </div>
+      <div class="event-card">
+        <span class="event-tag">Debate</span>
+        <p class="event-date">August 22, 2026</p>
+        <h3 class="event-title">Social Media & the Adolescent Brain</h3>
+        <p class="event-desc">A structured Oxford-style debate examining the evidence on screen time, identity formation, and mental wellbeing.</p>
+        <p class="event-arrow">Register →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join-section" id="join">
+  <div class="join-inner">
+    <p class="section-label">Membership</p>
+    <h2 class="section-title">Become part of<br><em>PSYNAPSE</em></h2>
+    <div class="divider"></div>
+    <p>Open to all students of DPS Dwarka. No prior knowledge of psychology required — just genuine curiosity and a willingness to engage.</p>
+    <form id="join-form" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="class">Class &amp; Section</label>
+          <input type="text" id="class" placeholder="e.g. XI-B" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="your.name@school.com" required />
+        </div>
+        <div class="form-group">
+          <label for="reason">Why Join?</label>
+          <select id="reason" required>
+            <option value="">Select a reason</option>
+            <option>Passion for psychology</option>
+            <option>Career exploration</option>
+            <option>Curious about human behaviour</option>
+            <option>Mental health advocacy</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label for="message">Tell us a little about yourself (optional)</label>
+          <textarea id="message" placeholder="Any interests, goals, or questions you have..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+    <div class="form-success" id="form-success">
+      ✓ &nbsp; Application received! We'll be in touch soon. Welcome to PSYNAPSE.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PSY<span>NAPSE</span></div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#events">Events</a>
+    <a href="#join">Join Us</a>
+  </div>
+  <div class="footer-credits">Psychology Club of DPS Dwarka &nbsp;·&nbsp; All Rights Reserved</div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+  hamburger.addEventListener('click', () => navMenu.classList.toggle('open'));
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
+
+  // Synapse canvas animation
+  const canvas = document.getElementById('synapse');
+  const ctx = canvas.getContext('2d');
+  let nodes = [], W, H;
+
+  function resize() {
+    W = canvas.width = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+    nodes = Array.from({ length: 45 }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.45, vy: (Math.random() - 0.5) * 0.45,
+      r: Math.random() * 2.5 + 1.5,
+      pulse: Math.random() * Math.PI * 2
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    nodes.forEach(a => {
+      a.x += a.vx; a.y += a.vy; a.pulse += 0.02;
+      if (a.x < 0 || a.x > W) a.vx *= -1;
+      if (a.y < 0 || a.y > H) a.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 170) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(196,181,244,${(1 - d / 170) * 0.45})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+      const n = nodes[i];
+      const glow = 0.6 + 0.4 * Math.sin(n.pulse);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(196,181,244,${glow * 0.8})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('join-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.event-card, .pillar, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
