@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Team — PSYNAPSE</title>
+  <link rel="stylesheet" href="../assets/css/global.css" />
+  <style>
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
+    .team-card { background: #fff; border-top: 3px solid var(--violet); padding: 2rem; text-align: center; transition: transform 0.25s, box-shadow 0.25s; }
+    .team-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(108,63,197,0.1); }
+    .avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--violet), var(--lavender)); margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 2rem; color: #fff; font-weight: 600; }
+    .team-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .team-role { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--violet); font-weight: 500; margin-bottom: 0.8rem; }
+    .team-bio { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+    .team-class { font-size: 0.75rem; color: rgba(74,85,104,0.6); margin-top: 0.5rem; }
+    .section-head { margin-bottom: 3rem; }
+    .tier-label { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin: 3.5rem 0 0.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(108,63,197,0.15); }
+    @media(max-width:768px){ .team-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:480px){ .team-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div class="page-hero">
+  <p class="page-hero-label">The People Behind PSYNAPSE</p>
+  <h1>Apex <em>Team</em></h1>
+  <p>Meet the students who lead, organise, and shape the vision of PSYNAPSE every year.</p>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p class="tier-label">Leadership</p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar">P</div>
+        <div class="team-name">President Name</div>
+        <div class="team-role">President</div>
+        <p class="team-bio">Sets the vision and direction for PSYNAPSE, oversees all operations, and represents the club at school events.</p>
+        <p class="team-class">Class XII-A</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">V</div>
+        <div class="team-name">Vice President Name</div>
+        <div class="team-role">Vice President</div>
+        <p class="team-bio">Supports the president, coordinates between departments, and leads the events team.</p>
+        <p class="team-class">Class XII-B</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">S</div>
+        <div class="team-name">Secretary Name</div>
+        <div class="team-role">Secretary General</div>
+        <p class="team-bio">Manages documentation, internal communications, and ensures club operations run smoothly.</p>
+        <p class="team-class">Class XI-A</p>
+      </div>
+    </div>
+
+    <p class="tier-label">Core Committee</p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="avatar">R</div>
+        <div class="team-name">Research Head Name</div>
+        <div class="team-role">Head of Research</div>
+        <p class="team-bio">Leads academic projects, coordinates paper writing, and mentors junior researchers.</p>
+        <p class="team-class">Class XII-C</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">E</div>
+        <div class="team-name">Events Head Name</div>
+        <div class="team-role">Head of Events</div>
+        <p class="team-bio">Plans and executes workshops, speaker series, and the annual fest with precision.</p>
+        <p class="team-class">Class XI-B</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">C</div>
+        <div class="team-name">Creative Head Name</div>
+        <div class="team-role">Head of Creative</div>
+        <p class="team-bio">Oversees design, social media, the magazine, and all visual communications.</p>
+        <p class="team-class">Class XI-C</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">O</div>
+        <div class="team-name">Outreach Head Name</div>
+        <div class="team-role">Head of Outreach</div>
+        <p class="team-bio">Manages external partnerships, alumni relations, and community engagement.</p>
+        <p class="team-class">Class XII-A</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">W</div>
+        <div class="team-name">Writeups Head Name</div>
+        <div class="team-role">Head of Writeups & Blog</div>
+        <p class="team-bio">Curates and edits member submissions, maintains the club blog, and drives content strategy.</p>
+        <p class="team-class">Class XI-A</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="avatar">T</div>
+        <div class="team-name">Tech Head Name</div>
+        <div class="team-role">Head of Technology</div>
+        <p class="team-bio">Manages the website, digital tools, and tech infrastructure for the club.</p>
+        <p class="team-class">Class XII-B</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../assets/nav.js"></script>
+</body>
+</html>
